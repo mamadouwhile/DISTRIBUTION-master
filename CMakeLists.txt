@@ -1,22 +1,34 @@
-cmake_minimum_required(VERSION 3.1.0)
+cmake_minimum_required(VERSION 3.10)
 
 project(Arene_light)
 
-add_subdirectory(joueurs)
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_compile_options(-Wall -Wpedantic)
 
 find_package(Threads REQUIRED)
 
-set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED on)
-set(CMAKE_CXX_EXTENSIONS off)
-add_compile_options(-Wall -Wpedantic)
+add_subdirectory(joueurs)
 
-set(SRC_LIST
-    arbitre.cpp
-    main.cpp
+set(PREBUILT_OBJECTS
+        ${CMAKE_CURRENT_SOURCE_DIR}/jeu.o
 )
 
-add_executable(${PROJECT_NAME} ${SRC_LIST})
+set_source_files_properties(${PREBUILT_OBJECTS} PROPERTIES
+        EXTERNAL_OBJECT TRUE
+        GENERATED TRUE
+)
 
-target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT} joueurs ${CMAKE_CURRENT_SOURCE_DIR}/jeu.o)
+add_executable(Arene_light
+        main.cpp
+        arbitre.cpp
+        ${PREBUILT_OBJECTS}
+)
+
+target_link_libraries(Arene_light
+        joueurs
+        Threads::Threads
+)
