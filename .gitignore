@@ -21,6 +21,9 @@ Makefile
 *.so
 *.dylib
 
+# Exception pour le fichier objet fourni
+!jeu.o
+
 # Local binaries and temporary analysis files
 Arene_light
 probe_mystere
