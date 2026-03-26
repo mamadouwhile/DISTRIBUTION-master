@@ -13,10 +13,19 @@ find_package(Threads REQUIRED)
 
 add_subdirectory(joueurs)
 
+set(PREBUILT_OBJECTS
+        ${CMAKE_CURRENT_SOURCE_DIR}/jeu.o
+)
+
+set_source_files_properties(${PREBUILT_OBJECTS} PROPERTIES
+        EXTERNAL_OBJECT TRUE
+        GENERATED TRUE
+)
+
 add_executable(Arene_light
         main.cpp
         arbitre.cpp
-        jeu.cpp
+        ${PREBUILT_OBJECTS}
 )
 
 target_link_libraries(Arene_light
