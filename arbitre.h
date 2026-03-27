@@ -13,7 +13,7 @@
 #include "joueurs/joueur_brutal.h"
 #include "joueurs/joueur_MCTS.h"
 
-#define TEMPS_POUR_UN_COUP 10 // millisecondes
+#define TEMPS_POUR_UN_COUP 200 // millisecondes
 #define COUP_INVALIDE -1000
 #define JOUEUR_1 1
 #define JOUEUR_2 2
